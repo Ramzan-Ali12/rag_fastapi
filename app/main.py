@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from api.v1 import query_route
-from core.config import settings
+from app.api.v1 import query_route
+from app.core.config import settings
 
 app = FastAPI(
     title="RAG FastAPI Docs",

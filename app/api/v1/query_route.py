@@ -1,11 +1,21 @@
-from fastapi import APIRouter, HTTPException, Depends
-from services.rag_services import RAGService
-router = APIRouter()
+# app/api/v1/query_route.py
 
-@router.post("/rag/")
-def query_rag_model(query: str, service: RAGService = Depends()):
+from fastapi import APIRouter, HTTPException
+from app.schemas.rag import RAGQueryRequest, RAGResponse
+from app.services.rag_services import RAGService
+
+router = APIRouter()
+rag_service = RAGService()
+
+@router.post("/query/", response_model=RAGResponse)
+async def query_endpoint(request: RAGQueryRequest):
+    """
+    Endpoint to query the RAG service.
+    
+    - **question**: The question to ask the RAG service.
+    """
     try:
-        response = service.query_data(query)
-        return {"answer": response}
+        response = rag_service.query_data(request)  # Pass the request body directly
+        return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

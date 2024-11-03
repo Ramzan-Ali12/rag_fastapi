@@ -1,4 +1,4 @@
-from core.config import settings
+from app.core.config import settings
 from langchain_openai import OpenAIEmbeddings
 from langchain_mongodb import MongoDBAtlasVectorSearch
 
