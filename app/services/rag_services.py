@@ -1,8 +1,8 @@
-from app.utils.dependencies import get_vector_store
-from app.core.config import settings
+from utils.dependencies import get_vector_store
+from core.config import settings
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
-from langchain.output_parsers import StrOutputParser
+from langchain.output_parsers import PydanticOutputParser
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 
 class RAGService:
@@ -34,7 +34,7 @@ class RAGService:
             retriever=retriever,
             return_source_documents=True,
             prompt_template=custom_rag_prompt,
-            output_parser=StrOutputParser(),
+            output_parser=PydanticOutputParser(),
         )
         
         return rag_chain.run({"question": query})

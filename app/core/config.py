@@ -1,5 +1,5 @@
 import os
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings # NEW
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "RAG Project"
